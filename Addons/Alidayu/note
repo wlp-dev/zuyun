@@ -1,0 +1,17 @@
+API接口：https://api.alidayu.com/doc2/apiList.htm?spm=a3142.7395905.1999205496.19.CFipC5
+
+1.短信验证码和短信通知的使用“短信发送”是一样的；
+2.短信通知使用“语音通知”有2个接口：alibaba.aliqin.fc.voice.num.singlecall (语音通知) 这个api需要在阿里大鱼的后台上传音频文件；另一个 alibaba.aliqin.fc.tts.num.singlecall (文本转语音) 的区别如下：
+
+前者：
+$req = new AlibabaAliqinFcVoiceNumSinglecallRequest;
+$req ->setVoiceCode( "c2e99ebc-2d4c-4e78-8d2a-afbb06cf6216.wav" );
+
+后者：
+$req = new AlibabaAliqinFcTtsNumSinglecallRequest;
+$req ->setTtsParam( "" );
+$req ->setTtsCode( "TTS_1234123" );
+
+接口名称不一样，另外后者增加了参数这一设置；
+
+http://www.qmit.cn

@@ -1,0 +1,99 @@
+<extend name="Public/base"/>
+<block name="body">
+
+	<div class="main-title clearfix ">
+		<h2><empty name="info['id']">新增<else/>编辑</empty>短信模板</h2>
+	</div>
+	<!-- 表单 -->
+	<form id="form" action="{:addons_url('Alidayu://Alidayu/updateTpl')}" method="post" class="form-horizontal">
+		<!-- 基础文档模型 -->
+		<div id="tab1" class="tab-pane with-padding in tab1">
+
+			<div class="form-item cf">
+				<label class="item-label">类型<span class="check-tips">（如果选择系统模板，则只能添加，不可编辑和删除）</span></label>
+				<div class="controls">
+					<label class="radio-inline"><input type="radio" class="radio-inline" name="type" value="0" <neq name="info['type']" value="1">checked="checked"</neq>>自定义模板</label>
+					<label class="radio-inline"><input type="radio" class="radio-inline" name="type" value="1" <eq name="info['type']" value="1">checked="checked"</eq>>系统模板</label>
+				</div>
+			</div>
+
+			<div class="form-item cf">
+				<label class="item-label">用途</label>
+				<div class="controls ">
+					<label class="radio-inline"><input type="radio" class="radio-inline" name="tpl_type" value="1" <eq name="info['tpl_type']" value="1">checked="checked"</eq>>验证码</label>
+					<label class="radio-inline"><input type="radio" class="radio-inline" name="tpl_type" value="2" <eq name="info['tpl_type']" value="2">checked="checked"</eq>>短信通知</label>
+				</div>
+			</div>
+
+			<div class="form-item cf">
+				<label class="item-label">展示类型</label>
+				<div class="controls">
+					<select name="show_type" class="form-control form-input-width">
+						<option value="sms" <eq name="info['show_type']" value="sms">selected</eq>>短信息</option>
+						<option value="call" <eq name="info['show_type']" value="call">selected</eq>>语音电话</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-item cf">
+				<label class="item-label">语音类型</label>
+				<div class="controls">
+					<select name="voice_type" class="form-control form-input-width">
+						<option value="tts" <eq name="info['voice_type']" value="tts">selected</eq>>文本转语音</option>
+						<option value="voice" <eq name="info['voice_type']" value="voice">selected</eq>>语音通知</option>
+					</select>
+				</div>
+			</div>
+
+			<div class="form-item cf">
+				<label class="item-label">模板名称</label>
+				<div class="controls">
+					<input type="text" class="text  form-control form-input-width" name="template_name" value="{$info.template_name}">
+				</div>
+			</div>
+
+			<div class="form-item cf">
+				<label class="item-label">模板ID或者语音ID</label>
+				<div class="controls">
+					<input type="text" class="text  form-control form-input-width" name="template_id" value="{$info.template_id}">
+				</div>
+			</div>
+
+			<div class="form-item cf">
+				<label class="item-label">模板内容<span class="check-tips">（上模板ID对应的内容模板）</span></label>
+				<div class="controls">
+					<input type="text" class="text  form-control form-input-width" name="template_content" value="{$info.template_content}">
+				</div>
+			</div>
+		</div>
+		<input type="hidden" name="id" value="{$info.id}"/>
+		<div class="form-item with-padding">
+			<input class="btn submit-btn " type="submit" value="确 定" />
+			<input class="btn btn-return" type="reset" value="重置" />
+		</div>
+	</form>
+
+	<script>
+		var obj_tplType=$("#form input[name=tpl_type]");
+		var obj_showType=$("#form select[name=show_type]");
+		var obj_voiceType=$("#form select[name=voice_type]");
+		var obj_templateContent=$("#form input[name=template_content]");
+
+		function changeVoiceType(){
+			var selTplType=$("input[name='tpl_type']:checked").val();
+			var selShowType=obj_showType.val();
+			if(selTplType==2&&selShowType=='call')obj_voiceType.parent().parent().slideDown();
+			else obj_voiceType.parent().parent().slideUp();
+
+			if(selTplType==2&&selShowType=='call'&&obj_voiceType.val()=='voice')obj_templateContent.parent().parent().slideUp();
+			else obj_templateContent.parent().parent().slideDown();
+		}
+
+		$(function(){
+			obj_tplType.change(function(){changeVoiceType();});
+			obj_showType.change(function(){changeVoiceType();});
+			obj_voiceType.change(function(){changeVoiceType();});
+			changeVoiceType();
+		})
+	</script>
+</block>

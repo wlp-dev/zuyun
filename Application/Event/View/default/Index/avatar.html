@@ -1,0 +1,96 @@
+<script src="/Public/js/jquery-2.0.3.min.js"></script>
+
+<block name="style">
+    <link href="__CSS__/event.css" rel="stylesheet" type="text/css"/>
+    <link href="__ZUI__/lib/datetimepicker/datetimepicker.min.css" rel="stylesheet" type="text/css">
+</block>
+
+<block name="body">
+    <div id="frm-post-popup">
+
+        <div class="controls">
+            <input type="hidden" id="userId" value="{$userId}" >
+            <input type="file" id="upload_picture_cover" >
+
+            <div class="upload-img-box" style="margin-top: 20px;width: 250px">
+                <div style="font-size:3em;padding:2em 0;color: #ccc;text-align: center">暂无头像</div>
+            </div>
+        </div>
+        <div style="width:250px;text-align:center">
+            <button type="button" class="btn btn-primary doUpload" style="padding: 5px 20px 5px 32px;letter-spacing: 12px;font-size: 14px;position:fixed;bottom:20px;left:80px;">{:L('_SUBMIT_')}</button>
+        </div>
+    </div>
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <link href="__CORE_CSS__/form_check.css" rel="stylesheet" type="text/css">
+    <script type="text/javascript" src="__CORE_JS__/form_check.js"></script>
+    <script type="text/javascript" src="__ZUI__/lib/datetimepicker/datetimepicker.min.js" charset="UTF-8"></script>
+
+    <script>
+        var imgId = 0;
+        $("#upload_picture_cover").uploadify({
+            "height": 30,
+            "swf": "__STATIC__/uploadify/uploadify.swf",
+            "fileObjName": "download",
+            "buttonText": "上传头像",
+            "buttonClass": "uploadcover",
+            "uploader": "{:U('Core/File/uploadPicture',array('session_id'=>session_id()))}",
+            "width": 250,
+            'removeTimeout': 1,
+            'fileTypeExts': '*.jpg; *.png; *.gif;',
+            "onUploadSuccess": uploadPicturecover,
+            'overrideEvents': ['onUploadProgress', 'onUploadComplete', 'onUploadStart', 'onSelect'],
+            'onFallback': function () {
+                alert("{:L('_NOT_DETECTED_')}");
+            }, 'onUploadProgress': function (file, bytesUploaded, bytesTotal, totalBytesUploaded, totalBytesTotal) {
+                $("#cover_id_cover").parent().find('.upload-img-box').html(totalBytesUploaded + ' bytes uploaded of ' + totalBytesTotal + ' bytes.');
+            }, 'onUploadComplete': function (file) {
+                //alert('The file ' + file.name + ' finished processing.');
+            }, 'onUploadStart': function (file) {
+                //alert('Starting to upload ' + file.name);
+            }, 'onQueueComplete': function (queueData) {
+                // alert(queueData.uploadsSuccessful + ' files were successfully uploaded.');
+            }
+        });
+        function uploadPicturecover(file, data) {
+            var data = $.parseJSON(data);
+            var src = '';
+            if (data.status) {
+                $("#cover_id_cover").val(data.id);
+                imgId = $("#cover_id_cover").val();
+                src = data.url || data.path
+                $('.upload-img-box').html(
+                        '<div class="upload-pre-item"><img src="' + src + '"/></div>'
+                );
+            } else {
+                toast.error('{:L("_UPLOAD_FAIL_")}', '{:L("_TIP_GENTLE_")}');
+            }
+        }
+        $(function () {
+            $('.doUpload').click(function () {
+                var userId = $("#userId").val();
+                $.ajax({ 
+                    url: 'index.php?s=/event/index/avatarUp',    //请求的url地址 
+                    dataType: "json",   //返回格式为json 
+                    data: {'imgId':imgId,'userId':userId},    //参数值 
+                    type: "POST",   //请求方式 
+                    beforeSend: function() { 
+                        //请求前的处理 
+                    }, 
+                    success: function(req) { 
+                        alert(req);
+                    }, 
+                    complete: function() { 
+                        //请求完成的处理 
+                    }, 
+                    error: function() { 
+                        //请求出错处理 
+                    } 
+                }); 
+            })
+
+
+        })
+
+
+    </script>
+</block>

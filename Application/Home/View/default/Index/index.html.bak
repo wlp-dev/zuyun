@@ -1,0 +1,222 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+    <include file="Public/head"/>
+    <link href="__CSS__/home.css" type="text/css" rel="stylesheet">
+    <php> D('Member')->need_login();</php>
+</head>
+<body>
+<include file="Public/header"/>
+<div class="main-wrapper">
+    <!-- 头部 -->
+    <style>
+        .container{
+            width:1140px;max-width: 1140px
+        }
+        .cl{
+            background: url(/Public/dz/grid_stat_bg.png) repeat-x bottom #fff;
+            height: 350px; overflow: hidden
+        }
+        .signinbox {
+            border-radius: 0;
+            float: left;
+            height: 52px;
+            line-height: 52px;
+            width: 100%;
+            margin-top: 0;
+            text-align: center;
+            font-size: 16px;
+            border-top: 3px solid #4fc277;
+            border-bottom: 1px solid #F1F1F1;
+            background: #f9fdfb;
+        }
+        .mylist {
+            padding: 15px 20px;
+            
+            border-radius: 0 0 3px 3px;
+            height: 64px;
+        }
+        .mylist li {
+            border-right: 1px solid #eee;
+            margin: 20px 0px;
+            width: 105px;
+            float: left;
+            height: 59px;
+            padding: 3px 0;
+            font-size: 14px;
+            list-style: none;
+            text-align: center;
+        }
+        .mylist li.borderremove{
+            border: 0px;
+        }
+        .mylist li span {
+            width: 89px;
+            line-height: 37px;
+            display: inline-block;
+            vertical-align: middle;
+            zoom: 1;
+            font-size: 22px;
+            font-weight: 400;
+            clear: both;
+        }
+        .mylist li:hover span {
+            color: #1499f8;
+        }
+        .featured {
+            position: relative;
+            height: 200px;
+            font-size: 14px;
+           
+            clear: both;
+        }
+        .ie7 .featured { background-position: 0 150px}
+        .featured .bd {
+            height: 200px;
+            margin: 0 20px;
+            border-top: 1px solid #f1f1f1;
+            overflow: hidden
+        }
+        .featured .bd li {
+            float: left;
+            height: 200px;
+            width: 320px;
+            text-align: center;
+        }
+        .featured .bd li h4 {
+            margin: 35px 0 -20px;
+            display: block;
+            
+            font-size: 26px;
+        }
+        .featured .bd li p {
+            margin-top: 25px;
+        }
+        .bluecolor {
+            color: #1499f8;
+        }
+        .featured .bd li span { display: inline-block; position: relative}
+        .featured .bd li i {
+            display: inline-block;
+            height: 1px;
+            width: 20px;
+            top: 10px;
+        }
+        .featured .bd .left_line {
+            left: -30px;
+        }
+        .featured .bd .right_line {
+            right: -30px;
+        }
+        .featured .bd li p {
+            margin-top: 25px;
+        }
+        .featured .bd li .whitesmallbutton, .featured .bd li .forum_newbie a, .forum_newbie .featured .bd li a {
+            display: inline-block;
+            padding: 0 12px 0 15px;
+        }
+        .whitesmallbutton {
+            line-height: 35px;
+            border: 1px solid #F1F1F1
+        }
+        .featured .bd li small {
+            margin: 0 5px;
+            height: 10px;
+        }
+        .featured .bd li p em {
+            margin: 0 0 0 4px;
+            font-size: 14px;
+        }
+        .featured .hd {
+            position: absolute;
+            width: auto;
+            height: 10px;
+            bottom: 0;
+            left: 0;
+            padding: 8px 0;
+            margin-left: 135px;
+            text-align: center
+        }
+        .featured .hd li {
+            float: left;
+            margin: 0 5px 0 0;
+            cursor: pointer;
+            border-radius: 2px;
+            overflow: hidden
+        }
+        .featured .hd a, .featured .hd li {
+            background-color: #ccc;
+            height: 3px;
+            width: 18px;
+            line-height: 2;
+        }
+        .featured .hd li.on { background: #1499f8}
+    </style>
+    <include file="Public/_after_nav"/>
+
+    <div id="main-container" class="top-bar" style="margin-top:75px;">
+        <volist name="showBlocks" id="v">
+            <php>if($v=='slider'){</php>
+            <div class="container" style="height:350px;margin-bottom:15px;">
+                <div class="row">
+
+                    <div class="col-xs-8">
+                        {:W('Common/Adv/render',array(array('name'=>'slider','type'=>2,'width'=>'738px','height'=>'350px','margin'=>'0','title'=>'首页轮播图','data'=>array('style'=>1))))}
+                    </div>
+                    <div class="col-xs-4">
+                        <div class="box cl">
+
+                            <a href="/index.php?s=/surname/index/groups.html"><div class="signin">
+                               <div class="signinbox">天下姓氏一家亲  ›</div>
+                            </div></a><div class="mylist">
+                                  <ul>
+                                    <li><a href="/index.php?s=/ucenter/config/family.html"><span class="colorlink">569134</span><p>族人总数</p></a></li>
+                                    <li><a href="/index.php?s=/event/index/myevent.html"><span>171164</span><p>记录总数</p></a></li>
+                                    <li class="borderremove"><a href="home.php?mod=spacecp&amp;ac=profile&amp;op=verify"><span>265</span><p>认证修谱师</p></a></li>
+                                  </ul>
+                                </div><div class="featured">
+                              <div class="bd">
+                                <div class="tempWrap">
+                                    <ul class="_flslidelist">
+                                  <li style="float: left; width: 320px;">
+                                    <h4 class="bluecolor">免费注册</h4>
+                                    <p class="bluecolor"><span> -- 三分钟拥有自己的家谱 -- </span></p>
+                                    <p>
+                                       <a href="/index.php?s=/family/index/index.html" class="whitesmallbutton color2" target="_blank">创建家谱<em>»</em></a><small class="pipe"></small>
+                                       <a href="/index.php?s=/ucenter/config/other" class="whitesmallbutton color2" target="_blank">查找族谱<em>»</em></a>
+                                    </p>
+                                  </li>
+                                </ul></div>
+                              </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+
+            </div>
+
+
+            <php>}else{</php>
+            {:W($v.'/HomeBlock/render')}
+            <php>}</php>
+
+        </volist>
+    </div>
+</div>
+
+
+
+
+<!-- /头部 -->
+
+<!-- 主体 -->
+
+<!-- /主体 -->
+
+<!-- 底部 -->
+<include file="Public/footer"/>
+<!-- /底部 -->
+</body>
+</html>

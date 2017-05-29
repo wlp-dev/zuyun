@@ -1,0 +1,153 @@
+.settings/
+
+#java
+
+target/
+.project
+*.iml
+*.class
+classes/
+.classpath
+/bin
+
+.git
+.svn
+.hg
+.zip
+.gz
+
+.DS_Store
+
+# IntelliJ - PhpStorm and PyCharm
+.idea
+.idea/
+.idea/*
+*.iml
+*.ipr
+*.iws
+
+# Netbeans
+nbproject
+.nbproject
+.nbproject/*
+nbproject/*
+nbproject/private/
+build/
+nbbuild/
+nbdist/
+nbactions.xml
+nb-configuration.xml
+
+# Thumbnails
+._*
+# Files that might appear on external disk
+.Spotlight-V100
+.Trashes
+
+# SublimeText project files
+/*.sublime-project
+*.sublime-workspace
+
+*~
+*.swp
+*.swo
+*.swn
+*.tmp
+*.save
+.sass*
+
+.netrwhist
+.session.vim
+t.*
+
+# nodejs
+node_modules
+logs/*
+npm-debug.log
+
+.*-cache
+.project
+.build_*
+
+
+Runtime/
+dist/
+html/
+views/
+
+Runtime
+temp
+dist
+node_modules
+bower_components
+.tmp
+*.scssc
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# Packages #
+############
+# it's better to unpack these files and commit the raw source
+# git has its own built in compression methods
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip
+
+# Logs and databases #
+######################
+*.log
+*.sql
+*.sqlite
+
+# OS generated files #
+######################
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+Icon?
+ehthumbs.db
+Thumbs.db
+
+
+# Node specific #
+#################
+lib-cov
+*.seed
+*.log
+*.dat
+*.out
+*.pid
+*.gz
+pids
+logs
+#results
+npm-debug.log
+node_modules/
+
+
+# Sublime specific #
+####################
+sftp-config*
+*.sublime-*
+
+
+# webstorm specific #
+####################
+.idea
+
+# sass generated specific #
+##########################
+*.map

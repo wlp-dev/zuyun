@@ -1,0 +1,23 @@
+<extend name="Base/common"/>
+<block name="body">
+
+    <link type="text/css" rel="stylesheet" href="__CSS__/group.css"/>
+    <script type="text/javascript" src="__JS__/common.js"></script>
+
+    <div class="common_block_border group_info margin-bottom-15" style="margin-top:60px;">
+        <div class="group_tags group_types" style="padding: 15px;">
+            <volist name="parent" id="type">
+                <a href="{:U('group',array('cate'=>$type['id']))}" target="_blank">
+                <!--//TODO 添加标签的链接-->
+                {$type.title}
+                </a>
+            </volist>
+        </div>
+
+    </div>
+
+
+
+</block>
+
+

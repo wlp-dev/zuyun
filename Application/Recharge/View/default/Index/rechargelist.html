@@ -1,0 +1,67 @@
+<extend name="Base/common"/>
+
+<block name="style">
+    <link href="__CSS__/recharge.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="header">
+    <include file="Public/_nav"/>
+</block>
+<block name="body">
+    <div class="common-block">
+        <section>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>&nbsp;</p>
+                    <h4>{:L("_RECHARGE_CENTER_")}</h4>
+                    <hr class="oneuser-title-hr"/>
+                </div>
+            </div>
+            <include file="_menu"/>
+            <div style="margin-bottom: 50px">
+                <h3 style="font-size: 16px;font-weight: bold">{:L("_ALL_ORDERS_")}</h3>
+
+                <ul class="nav nav-secondary">
+                    <li class="{$payOk_all}"><a href="{:U('rechargeList')}">{:L("_ALL_")}</a></li>
+                    <li class="{$payOk_0}"><a href="{:U('rechargeList',array('payok'=>0))}">{:L("_NOT_PAID_")}</a></li>
+                    <li class="{$payOk_1}"><a href="{:U('rechargeList',array('payok'=>1))}">{:L("_PAID_")}</a></li>
+                </ul>
+
+                <hr/>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{:L("_ORDER_NUMBER_")}</th>
+                        <th>{:L("_RECHARGE_AMOUNT_")}</th>
+                        <th>{:L("_RECHARGE_TYPE_")}</th>
+                        <th>{:L("_PAYMENT_METHOD_")}</th>
+                        <th>{:L("_ORDER_STATUS_")}</th>
+                        <th>{:L("_OPERATION_")}</th>
+                    </tr>
+                    </thead>
+                    <volist name="list" id="vo">
+                        <tr>
+                            <td>{$vo.id}</td>
+                            <td>{$vo.amount|number_format=2}</td>
+                            <td>{$vo.score_type.title}</td>
+                            <td>{$vo.pay_method}</td>
+                            <td>{:get_order_status_cn($vo['id'])}</td>
+                            <td><a href="{:U('recharge/index/order',array('id'=>$vo['id']))}" class="btn btn-primary">{:L("_VIEW_ORDERS_")}</a></td>
+                        </tr>
+                    </volist>
+
+
+                </table>
+                <div class="pull-left">
+                    {:getPagination($totalCount,$r)}
+                </div>
+            </div>
+
+        </section>
+    </div>
+
+
+
+</block>
+
+
+

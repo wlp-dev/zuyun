@@ -1,0 +1,71 @@
+<div class="with-padding clearfix">
+    <ul class="pull-left nav nav-secondary">
+        <li ><a href="{:U('','name=Alidayu')}">短信签名</a></li>
+        <li><a href="{:U('','name=Alidayu&dir=tpl')}">内容模板</a></li>
+        <li class="active"><a href="{:U('','name=Alidayu&dir=url2config')}">路由配置</a></li>
+    </ul>
+    <div class="pull-right"></div>
+</div>
+
+<div class="with-padding">
+    <a class="btn" href="{:addons_url('Alidayu://Alidayu/addUrl2config')}">新 增</a>
+</div>
+
+<php>
+    $ALIDAYU_SIGNNAME=F("ALIDAYU_SIGNNAME");
+    if(!$ALIDAYU_SIGNNAME){
+        A("Addons://Alidayu/Alidayu")->resetCache('signname');
+        $ALIDAYU_SIGNNAME=F("ALIDAYU_SIGNNAME");
+    }
+    $ALIDAYU_TPL=F("ALIDAYU_TPL");
+    if(!$ALIDAYU_TPL){
+        A("Addons://Alidayu/Alidayu")->resetCache('tpl');
+        $ALIDAYU_TPL=F("ALIDAYU_TPL");
+    }
+
+    foreach($_list as &$item){
+        $item['create_time']=date('Y-m-d',$item['create_time']);
+
+        $tplInfo=$ALIDAYU_TPL[$item['template_id']];
+        $item['show_type']=$tplInfo['show_type']=='sms'?'短信':'语音';
+        if($tplInfo['tpl_type']==1){
+            $item['content']='['.$ALIDAYU_SIGNNAME[$item['signname_id']].']'.$tplInfo['template_content'];
+        }else{
+            $item['content']=$ALIDAYU_TPL['template_content'];
+        }
+    }
+</php>
+<div class="with-padding">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <volist name="listKey" id="vo">
+                <th>{$vo}</th>
+            </volist>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="_list" id="lv" key="vo">
+            <tr>
+                <td>{$lv.id}</td>
+                <volist name="listKey" id="lk">
+                   <td>
+					<switch name="key">
+						<case value="type">
+							{$lv[$key]=='1'?'固定签名':'自定义签名'}
+						</case>
+						<default/>{$lv.$key}
+					</switch>
+					</td>
+                </volist>
+                <td>
+                    <a href="{:addons_url('Alidayu://Alidayu/editUrl2config',array('id'=>$lv['id']))}">编辑</a>
+                    <a class="confirm ajax-get" href="{:addons_url('Alidayu://Alidayu/delUrl2config',array('id'=>$lv['id']))}">删除</a>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</div>

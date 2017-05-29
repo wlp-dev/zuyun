@@ -1,0 +1,97 @@
+<extend name="Config/base"/>
+<block name="style">
+    <link href="__CSS__/family.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="body">
+
+    <div id="center">
+        <div id="center_base" class="with-padding" style="padding: 20px">
+
+            <h2>寻根问祖</h2>
+
+            <div class="row">
+
+
+                <form class="form-horizontal" action="{:U('other')}" method="get">
+                    <div class="form-group has-feedback">
+                        <div class="col-xs-1">
+                            <label for="title" class="control-label" style="width:50px">{:L('_TITLE_')}</label>
+                        </div>
+                        <div class="col-xs-3">
+                            <input id="title" name="title" class="form-control form_check" check-type="Text" value="{$titleName}" placeholder="{:L('_TITLE_')}" />
+                        </div>
+                        <div class="col-xs-1">
+                            <label for="" class="control-label" style="width:60px">{:L('_TANGHAO_')}</label>
+                        </div>
+                        <div class="col-xs-2">
+                            <input type="text" id="sTime" name="sTime" class="form-control form_check" value="{$sTime}" placeholder="{:L('_TIME_START_')}"/>
+                        </div>
+                        <div class="col-xs-1">   
+                            <label for="" class="control-label" style="width:60px">{:L('_junwang_')}</label>
+                        </div>
+                        <div class="col-xs-2">
+                              <input type="text" id="eTime" name="eTime" class="form-control form_check"  value="{$eTime}" placeholder="{:L('_TIME_OVER_')}"/>
+                        </div>
+                        <div class="col-xs-1" style="margin-left: 20px;">
+                            <span type="button" class="btn btn-primary searchOther">查找</span>
+
+                        </div>
+                    </div>
+
+                </form>
+
+            </div>
+
+
+
+            <table id="table-data" class="table table-bordered table-striped table-hover">
+                <!-- 表头 -->
+                <thead>
+                    <tr>
+                        <th>名称</th>
+                        <th>堂号</th>
+                        <th>郡望</th>
+                        <th>发起人</th>
+                        <th>号召人</th> 
+                        <th>编修人</th>           
+                    </tr>
+                </thead>
+
+                <!-- 列表 -->
+                <tbody>
+                <volist name="contents" id="vo">
+                    <tr>
+                        
+                        <td>{$vo.title}</td>
+                        <td>{$vo.sTime}</td>
+                        <td>{$vo.eTime}</td>
+                        <td>{$vo.sponsor}</td>
+                        <td>{$vo.address}</td>
+                        <td>
+                            <a style="color:green" class="pdl10" href="{:U('Ucenter/Index/information', array('uid' => $vo['uid']))}"><span>{$vo.user.nickname}</span></a>
+                        </td>
+                    </tr>
+                </volist>          
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</block>
+
+<block name="script">
+    <script>
+        //检查两次输入的密码是否一致
+        $(function () {
+            $('.searchOther').click(function () {
+                var title = $("#title").val();
+                var tang = $("#sTime").val();
+                var jun = $("#eTime").val();
+                window.location.href="/index.php?s=/ucenter/config/other/title/"+title+"/tang/"+tang+"/jun/"+jun; 
+            })
+
+
+        })
+
+    </script>
+</block>

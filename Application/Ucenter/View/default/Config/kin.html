@@ -1,0 +1,67 @@
+<extend name="Config/base"/>
+<block name="style">
+    <link href="__CSS__/family.css" rel="stylesheet" type="text/css"/>
+</block>
+
+<block name="body">
+
+    <div id="center">
+        <div class="forum_module" style="width: 100%;min-height: 600px;">
+
+            <div class="row" style="padding:15px 15px 0 15px">
+                
+                <div class="event_header_title">
+                    <div class="pull-left"><i class="icon-user"></i> 族人信息 - {$titleTree}</div>
+                </div>
+               
+            </div>
+            <div class="row"  style="padding: 15px;font-size:13px;color:#666">
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                            <th width="10%">世代</th>
+                            <th width="20%">姓名</th>
+                           <!--  <th>配偶</th> -->
+                            <th width="10%">字辈</th>
+                            <th width="10%">性别</th>
+                            <th width="10%">排行</th>
+                            
+                            
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <volist name="userList" id="vo">
+                            <tr>
+                                <td>{$vo.level}世</td>
+                                <td>{$vo.name}</td>
+                                <!-- <td>{$vo.spouse}</td> -->
+                                
+                                <td>{$vo.gname}</td>
+                                <td>{$vo.sex}</td>
+                                <td>{$vo.order}</td>
+                            </tr>
+                        </volist>
+                    </tbody>
+                </table>
+            </div>
+            <div class="row issue_list">
+
+
+                <if condition="count($userList) eq 0">
+                    <div style="font-size:3em;padding:2em 0;color: #ccc;text-align: center">{:L('_TIP_EMPTY_')}</div>
+                </if>
+
+            </div>
+        </div>
+    </div>
+
+</block>
+
+
+
+
+
+
+
+
+

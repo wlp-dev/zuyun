@@ -1,0 +1,372 @@
+<html>
+  <head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+<meta charset="utf-8">
+
+
+<meta content="user-scalable=yes" name="viewport">
+
+<title>文</title>
+<meta name="description" content="文">
+<meta name="keywords" content="文">
+<style type="text/css">
+    .page-flip {width: 794px;margin: 10px auto;background: #fff;padding: 0;box-shadow: 0 0 30px #666;}
+  </style>
+
+
+  <style type="text/css">
+  body{margin:0px; padding:0px; background:#ccc;}
+  .fleft{float:left;}
+  .fright{float:right;}
+  h1,h2,ul,li{margin:0px; padding:0px; list-style:none;}
+  div.sideTitle h1,.colbox{/*direction: rtl!important;direction:inherit;writing-mode: tb-rl;*/
+      direction:ltr;
+      unicode-bidi:bidi-override;
+      writing-mode: tb-rl;
+      -ms-writing-mode: tb-rl;
+      -webkit-writing-mode:vertical-rl;
+  }
+  div.pageCont{width:735px; height:1173px; margin:0px auto; padding:70px 30px 10px;/*margin:40px auto; padding:10px;*/ background:#fff; overflow:hidden;page-break-after: always;}
+  div.sideTitle h1 span.degress270 {display: inline-block;line-height: 60px;height: 60;}
+  div.pagebody{width:719px; height:1072px; border:5px #000 solid; padding:5px;}
+  div.sideTitle{width:737px; height:60px;clear:both; border-bottom:2px #000 solid; position:relative; overflow:hidden; text-align:center;}
+  div.sideTitle h1{font:bold 40px/60px "zupu-fonts","HanHei SC", "PingFang SC","华文中宋","华文行楷","黑体"; clear:both; display:inline-block; margin:0px auto;}
+  
+  div.mainCont{width:715px; height:1067px; clear:both; background:#fff; overflow:hidden; border:2px #000 solid;}
+  div.mainCont .main{width:715px; height: 1004px;; overflow:hidden;}
+  
+  .row{width:725px; margin-left:-30px; height:190px; clear:both; padding:5px; border-bottom:2px #000 solid;overflow:hidden;}
+  
+  .colbox{float:right; display:inline; letter-spacing:2px;font:normal 16px/25px "zupu-fonts","HanHei SC", "PingFang SC","微软雅黑","黑体"; margin-left:25px;}
+  .colbox .ibottom{height:190px; text-align:right; float:right; display:inline;margin-bottom: 16px;}
+  .colbox .ibottom span{display:inline-block;}
+  .colbox .icenter{height:190px; text-align:center; float:right; display:inline;}
+  .colbox .icenter span{display:inline-block;}
+  .colbox .iheader{height:190px; text-align:center;float:right; display:inline; position:relative;width: 50px;overflow: hidden;}
+  .colbox .iheader h2{font:bold 40px/50px "zupu-fonts","HanHei SC", "PingFang SC","华文中宋","华文行楷","黑体"; display:inline-block;height: 180px;width: 55px;overflow: hidden;}
+  .colbox .iheader .itop{position:absolute; line-height:25px;}
+  .colbox .info{height:180px; float:right; display:inline;}
+  /*世代*/
+  .colbox .generation{width: 50px;height: 181px;text-align: center;margin-right: 5px;}
+  .colbox .generation .isi{font: normal 25px/40px "zupu-fonts","HanHei SC", "PingFang SC","微软雅黑","黑体";display: inline-block;padding: 2px;border: 2px #000 dotted;}
+  .colbox .generation .isi .generation-text{background: #000;color: #fff;display: inline-block;padding: 10px 0px;}
+    @media (max-device-width: 768px) {
+    .flide_div_absolute a{font-size:0.6em;}
+    .page-flip {width: 100%;margin:0 auto;}
+    div.pageCont{width: 98.5%;height: 98.0%;padding:10px 10px 20px;}
+    div.pagebody{width:98%;height:99%;}
+    div.mainCont{width:99.3%;height:99.6%;}
+    div.sideTitle{height:10%;width:100%;}
+    div.mainCont .main{width:100%;height:90%;}
+    .row{width:100%;height:19.2%;margin-left: 0;letter-spacing:2px;font: normal 18px/34px "zupu-fonts","HanHei SC", "PingFang SC","微软雅黑","黑体";}
+    .colbox .info{height:92%;}
+      .row .iheader,.row .icenter,.row .info,.row .ibottom{width:31px;}
+    .colbox .generation{height:100%;width: 50px;height: 100%;margin-right: 5px;}
+    .colbox .iheader{height:92%;width:62px;}
+    .colbox .iheader h2{font: bold 50px/60px "zupu-fonts","HanHei SC", "PingFang SC","华文中宋","华文行楷","黑体";}
+    .iheader.generation{width:50px;}
+    .colbox .generation .isi{font: normal 31px/44px "zupu-fonts","HanHei SC", "PingFang SC","微软雅黑","黑体";}
+    .colbox .iheader .itop{font: normal 24px/30px "zupu-fonts","HanHei SC", "PingFang SC","微软雅黑","黑体"}
+      div.sideTitle h1 span.degress270{line-height:100%;height:100%;}
+    }
+  </style>
+  </head>
+  
+  <body mycollectionplug="bind">
+    <div class="flide_div_absolute">
+      <div class="left" style="display:none;">
+        <a id="preview_page" title="上一页">《</a>
+      </div>
+      <div class="right" style="">
+        <a id="next_page" title="下一页">》</a>
+      </div>
+    </div>
+    <div class="search_div" style="display:none;">
+      <div class="search_group">
+        <div class="search_input">
+          <input autocomplete="off" id="search_div_text" placeholder="搜索" type="text">
+        </div>
+      </div>
+    </div>
+    <div class="page-flip shadow" dir="ltr" style="position: relative; width: 794px; height: 1253px; overflow: hidden; direction: ltr; transform: translate3d(0px, 0px, 0px);">
+      
+    <div class="page p-temporal" style="width: 794px; height: 1253px;"></div><div class="page-wrapper" page="1" style="position: absolute; overflow: hidden; width: 794px; height: 1253px; top: 0px; left: 0px; right: auto; z-index: 2;"><div style="position: absolute; top: 0px; left: 0px; overflow: hidden; z-index: auto; width: 1483px; height: 1483px;"><div class="page p1" style="float: left; width: 794px; height: 1253px; position: absolute; top: 0px; left: 0px; bottom: auto; right: auto;">
+        <div class="pageCont">
+            <div class="pagebody">
+                <div class="mainCont">
+        
+                    <div class="sideTitle"><h1></h1></div>
+        
+                    <div class="main">
+                        
+                        <div class="row colbox">
+                            
+                                
+                                    <div class="iheader generation">
+                                        <div class="isi">
+                                                <span class="generation-text">
+                                                    <span class="degress270">一</span><span class="degress270">世</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="iheader">
+                                        <div class="itop">
+                                          
+                                            <br>
+                                            
+                                            <span class="degress270">长</span><span class="degress270">子</span>
+                                            
+                                          
+                                        </div>
+                                        <h2>
+                                            tt
+                                        </h2>
+                                    </div>
+                                
+                            
+                        </div>
+                        
+                        <div class="row colbox">
+                            
+                                
+                                    <div class="iheader generation">
+                                        <div class="isi">
+                                                <span class="generation-text">
+                                                    <span class="degress270">二</span><span class="degress270">世</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="iheader">
+                                        <div class="itop">
+                                          
+                                            tt<br>
+                                            
+                                            <span class="degress270">长</span><span class="degress270">子</span>
+                                            
+                                          
+                                        </div>
+                                        <h2>
+                                            <span class="degress270">拍</span>
+                                        </h2>
+                                    </div>
+                                
+                            
+                        </div>
+                        
+                        <div class="row colbox">
+                            
+                                
+                                    <div class="iheader generation">
+                                        <div class="isi">
+                                                <span class="generation-text">
+                                                    <span class="degress270">三</span><span class="degress270">世</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="iheader">
+                                        <div class="itop">
+                                          
+                                            <span class="degress270">拍</span><br>
+                                            
+                                            <span class="degress270">长</span><span class="degress270">子</span>
+                                            
+                                          
+                                        </div>
+                                        <h2>
+                                            <span class="degress270">一</span>
+                                        </h2>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="ibottom">
+                                        <span><span class="degress270">配</span></span>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="iheader">
+                                        <div class="itop">
+                                          
+                                        </div>
+                                        <h2>
+                                            <span class="degress270">一</span><span class="degress270">氏</span>
+                                        </h2>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="ibottom">
+                                        <span><span class="degress270">继</span><span class="degress270">配</span></span>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="iheader">
+                                        <div class="itop">
+                                          
+                                        </div>
+                                        <h2>
+                                            <span class="degress270">二</span><span class="degress270">氏</span>
+                                        </h2>
+                                    </div>
+                                
+                            
+                        </div>
+                        
+                        <div class="row colbox">
+                            
+                                
+                                    <div class="iheader generation">
+                                        <div class="isi">
+                                                <span class="generation-text">
+                                                    <span class="degress270">四</span><span class="degress270">世</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="iheader">
+                                        <div class="itop">
+                                          
+                                            <span class="degress270">一</span><br>
+                                            
+                                            <span class="degress270">长</span><span class="degress270">子</span>
+                                            
+                                          
+                                        </div>
+                                        <h2>
+                                            3
+                                        </h2>
+                                    </div>
+                                
+                            
+                        </div>
+                        
+                        <div class="row colbox">
+                            
+                                
+                                    <div class="iheader generation">
+                                        <div class="isi">
+                                                <span class="generation-text">
+                                                    <span class="degress270">五</span><span class="degress270">世</span>
+                                                </span>
+                                        </div>
+                                    </div>
+                                
+                            
+                                
+                                    <div class="iheader">
+                                        <div class="itop">
+                                          
+                                            3<br>
+                                            
+                                            <span class="degress270">长</span><span class="degress270">子</span>
+                                            
+                                          
+                                        </div>
+                                        <h2>
+                                            5
+                                        </h2>
+                                    </div>
+                                
+                            
+                        </div>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+      </div></div>
+
+
+    <div style="top: 0px; left: 0px; overflow: hidden; z-index: 1; width: 794px; height: 1253px;"></div>
+</div>
+<div style="pointer-events: none; display: none; position: absolute; top: -10px; left: -257px; overflow: visible; z-index: auto;">
+  <div style="position: absolute; top: 10px; left: 257px; overflow: hidden; z-index: 2; display: none; width: 1483px; height: 1483px;">
+    <div class="fpage-template" style="position: absolute; top: 0px; left: 0px; overflow: visible; z-index: auto; cursor: default; width: 794px; height: 1253px;">
+        <div style="position: absolute; top: 0px; left: 0px; overflow: hidden; z-index: 1; width: 794px; height: 1253px;"></div>
+    </div>
+  </div>
+</div>
+
+
+<div class="shadow" style="position: absolute; top: 0px; left: 794px; overflow: hidden; z-index: auto; width: 794px; height: 1253px;"></div>
+
+</div>
+
+    <style type="text/css">
+      .search_input .dropdown-menu {
+        width: 100%;
+        box-shadow: none;
+        margin-left: -1px;
+      }
+      
+      .search_div {
+        width: 595px;
+      }
+      .search_div .dropdown-item-row .content {
+        font-size: 16px;
+      }
+      .search_div .search_input {
+        width: 100%;
+      }
+      .search_div .search_input input {
+        width: 575px;
+        height: 26px;
+        line-height: 26px;
+        border: none;
+        outline-color: #6a82ec;
+        background: rgba(0, 0, 0, 0.3);
+        padding: 2px 4px;
+        border-radius: 5px;
+        color: #000000;
+        padding: 0 10px;
+      }
+      .search_div .search_input input:before {
+        color: red;
+        text-align: center;
+      }
+      .search_div .search_input input::-webkit-input-placeholder {
+        color: #000000;
+        text-align: center;
+      }
+      .search_div .search_input input:-moz-placeholder {
+        color: #000000;
+        text-align: center;
+      }
+      
+      .search_div {
+        width: 794px;
+      }
+      .search_div .search_input {
+        width: 100%;
+      }
+      .search_div .search_input input {
+        width: 100%;
+        height: 26px;
+        border: none;
+        outline-color: #6a82ec;
+        background: white;
+      }
+    </style>
+    <style type="text/css">
+      .search_div {
+        top: 0px;
+      }
+    </style>
+  
+</body>
+
+</html>

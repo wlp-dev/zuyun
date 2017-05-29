@@ -1,0 +1,121 @@
+<extend name="Base/common"/>
+<block name="style">
+    <link href="__CSS__/recharge.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="header">
+    <include file="Public/_nav"/>
+</block>
+<block name="body">
+    <div class="common-block">
+        <section>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>&nbsp;</p>
+                    <h4>{:L("_RECHARGE_CENTER_")}</h4>
+                    <hr class="oneuser-title-hr"/>
+                </div>
+            </div>
+            <include file="_menu"/>
+
+
+            <div style="margin-bottom: 50px">
+                <h3 style="font-size: 16px;font-weight: bold">{:L("_ALL_RECORDS_")}</h3>
+
+
+                <ul class="nav nav-secondary">
+                    <li class="{$payOk_all}"><a href="{:U('withdrawList')}">{:L("_ALL_")}</a></li>
+                    <li class="{$payOk_0}"><a href="{:U('withdrawList',array('payok'=>0))}">{:L('_IN_THE_PRESENT_')}</a></li>
+                    <li class="{$payOk_1}"><a href="{:U('withdrawList',array('payok'=>1))}">{:L("_COMPLETED_")}</a></li>
+                    <li class="{$payOk_2}"><a href="{:U('withdrawList',array('payok'=>2))}">{:L("_CANCELLED_")}</a></li>
+                </ul>
+
+
+                <hr/>
+                <table class="table">
+                    <thead>
+                    <tr>
+                        <th>{:L("_ORDER_NUMBER_")}</th>
+                        <th>{:L("_PRESENT_AMOUNT_")}</th>
+                        <th><span class="text-danger">{:L("_FROZEN_AMOUNT_")}</span></th>
+                        <th>{:L("_PRESENT_TYPE_")}</th>
+                        <th>{:L("_PAYMENT_METHOD_")}</th>
+                        <th>{:L("_ORDER_STATUS_")}</th>
+                        <th>{:L("_FINISH_TIME_")}</th>
+                    </tr>
+                    </thead>
+                    <volist name="list" id="vo">
+
+                        <tr>
+                            <td>{$vo.id}</td>
+                            <td>￥ {$vo.amount|number_format=2} 元</td>
+                            <td><span class="font_grey">{$vo.frozen_amount|number_format=2} {$vo.score_type.unit}</span>
+                            </td>
+                            <td>{$vo.score_type.title}</td>
+                            <td>{$vo.pay_method}
+                                <button class="account_info btn-xs btn  btn-default "
+                                        data-toggle="popover" title={:L("_INFORMATION_ON_CURRENT_ACCOUNT_INFORMATION_WITH_DOUBLE_")}
+                                        data-content="{$vo.account_info|default=L("_NO_INFORMATION_ON_THE_ACCOUNT_IN_THE_ACCOUNT_")|htmlspecialchars}"
+                                        data-trigger="focus"><i class="icon icon-info"></i></button>
+                            </td>
+                            <td>
+                                <switch name="vo.payok">
+                                    <case value="0">
+                                        <a class="btn btn-success" data-role="cancel_withdraw" data-id="{$vo.id}"
+                                           title={:L("_CANCEL_WITH_DOUBLE_")}>{:L("_IN_THE_PRESENT_")}..</a>
+                                    </case>
+                                    <case value="1">
+                                      {:L("_TO_CARRY_OUT_WITH_SPACE_")}
+                                    </case>
+                                    <case value="2">
+                                        <span class="text-danger">{:L("_CANCEL_BUT_NOT_RETURN_")}</span>
+                                    </case>
+                                    <case value="-1">
+                                      {:L("_CANCELLED_WITH_SPACE_")}
+                                    </case>
+                                </switch>
+                            </td>
+                            <td>
+                                <eq name="vo.pay_time" value="0">
+                                    -
+                                    <else/>
+                                    {$vo.pay_time|friendlyDate}
+                                </eq>
+
+                            </td>
+                        </tr>
+
+                    </volist>
+
+                </table>
+
+
+                <div class="pull-left">
+                    {:getPagination($totalCount,$r)}
+                </div>
+            </div>
+        </section>
+    </div>
+
+
+    <script>
+        $(function () {
+            $('.account_info').popover();
+            $('[data-role="cancel_withdraw"]').click(function () {
+                var $this = $(this)
+                var id = $this.attr('data-id');
+                if (confirm({:L('_OK_CANCEL_THIS_TIME_FREEZING_AMOUNT_WILL_BE_RETURNED_TO_THE_ACCOUNT_WITH_PERIOD_WITH_QUESTION_WITH_SINGLE_')})) {
+                    $.post(U('recharge/index/cancelWithdraw'), {id: id}, function (msg) {
+                        if (msg.status) {
+                            toast.success(msg.info);
+                            setTimeout('location.reload()', 1500);
+                        } else {
+                            toast.error(msg.info)
+                        }
+                    }, 'json');
+                }
+            })
+        })
+    </script>
+
+
+</block>

@@ -1,0 +1,130 @@
+<extend name="Base/common"/>
+<block name="style">
+    <link href="__CSS__/recharge.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="header">
+    <include file="Public/_nav"/>
+</block>
+
+
+<block name="body">
+    <div class="common-block">
+        <section>
+            <div class="row">
+                <div class="col-xs-12">
+                    <p>&nbsp;</p>
+                    <h4>{:L("_CONFIRMATION_OF_ORDER_")}</h4>
+                    <hr class="oneuser-title-hr"/>
+                </div>
+            </div>
+            <include file="_menu"/>
+            <div style="margin-bottom: 50px">
+                <h3 style="font-size: 16px;font-weight: bold">{:L("_ORDER_INFORMATION_")}</h3>
+                <hr/>
+                <blockquote>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>{:L("_ORDER_NUMBER_")}</td>
+                            <td>{$order.id}</td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_RECHARGE_TYPE_")}</td>
+                            <td>{$order.score_type.title}</td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_RECHARGE_AMOUNT_")}</td>
+                            <td>{$order.amount} 元</td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_RECHARGE_RATE_")}</td>
+
+                            <td>
+                                1 RMB = {$order.recharge_type.UNIT} {$order.score_type.unit} {$order.score_type.title}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_CAN_BE_OBTAINED_")}{$order.score_type.title}</td>
+                            <td>
+
+                                <php>echo floor($order['recharge_type']['UNIT']*$order['amount']);</php>
+                                {$order.score_type.unit}{:L("_[THE_SYSTEM_WILL_AUTOMATICALLY_GIVE_UP_THE_SMALL_NUMBER_OF_SMALL_")}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_RECHARGE_MODE_")}</td>
+                            <td>{$order['pay_method']}</td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_ORDER_STATUS_")}</td>
+                            <td>{:get_order_status_cn($order['id'])}</td>
+                        </tr>
+
+                    </table>
+                </blockquote>
+
+                <php>if(get_order_status($order['id']) == 0 ){</php>
+                <div style="margin-bottom: 30px" class="clearfix">
+                    <form action="__ROOT__/Application/Recharge/Lib/Alipay/alipayapi.php" method="post" target="_blank">
+                        <input type="hidden" name="out_trade_no" value="{$order.id}"/>
+                        <input type="hidden" name="subject" value={:L("_ACCOUNT_RECHARGE_WITH_DOUBLE_")}/>
+                        <input type="hidden" name="total_fee" value="{$order.amount}"/>
+                        <input type="hidden" name="body" value={:L("_THROUGH_THE_PAYMENT_OF_TREASURE_IN_THE_STATION_ACCOUNT_TO_RECHARGE_WITH_PERIOD_WITH_DOUBLE_")}/>
+                        <input type="hidden" name="show_url" value=""/>
+                        <button class="btn btn-primary pull-right" type="submit">{:L("_IMMEDIATE_PAYMENT_")}</button>
+                    </form>
+                </div>
+                <php>}</php>
+
+                <php>if($record){</php>
+                <h3 style="font-size: 16px;font-weight: bold">{:L("_ALIPAY_ORDER_INFORMATION_")}</h3>
+                <blockquote>
+                    <table class="table table-bordered">
+                        <tr>
+                            <td>{:L("_ALIPAY_ORDER_NUMBER_")}</td>
+                            <td>{$record.trade_no}</td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_DRAWEE_")}</td>
+                            <td>{$record.buyer_email}</td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_PAYEE_")}</td>
+                            <td>{$record.seller_email} 元</td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_AMOUNT_OF_MONEY_")}</td>
+                            <td>
+                                ￥ {$record.total_fee} 元
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_ORDER_STATUS_")}</td>
+                            <td>
+
+                                <php>if($record['trade_status'] == 'TRADE_SUCCESS' || $record['trade_status'] == 'TRADE_FINISHED' ){
+                                    $trade_status = L('_PAY_FOR_SUCCESS_WITH_SINGLE_');
+                                    }else{
+                                    $trade_status = L('_FAILED_WITH_SINGLE_');
+                                    }
+
+                                </php>
+                                {$trade_status}
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>{:L("_TIME_")}</td>
+                            <td>   {$record.notify_time|date='Y-m-d H:i',###}</td>
+                        </tr>
+                    </table>
+
+
+                </blockquote>
+                <php>}</php>
+
+            </div>
+
+        </section>
+    </div>
+
+
+</block>

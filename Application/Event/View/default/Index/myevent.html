@@ -1,0 +1,180 @@
+<extend name="Base/common"/>
+
+<block name="style">
+    <link href="__CSS__/event.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="body">
+<!--导航-->
+<div style="margin-top:60px;"></div>
+
+    <div class="col-xs-3 pull-right" style="z-index: 99;">
+        <include file="_right"/>
+    </div>
+
+
+    <div class="col-xs-9">
+
+
+        <div class="forum_module" style="width: 100%;min-height: 600px;">
+
+            <div class="row" style="padding: 10px 10px 0 0 ">
+                <div class="col-xs-12">
+                    <div class="event_header_title">
+                        <div class="pull-left">我创建的族谱</div>
+                    </div>
+                </div>
+            </div>
+
+            <volist name="contents" id="vo">
+                <div class="clearfix event_list">
+                    <div class="col-xs-3" style="padding: 0">
+
+                        <a class="pull-left" target="_blank" href="{:U('Event/Index/detail',array('id'=>$vo['id']))}"> <img
+                                class=""
+                                src="{$vo.cover_id|getThumbImageById=320,210}" style="width: 180px;height: 210px;"/></a>
+                    </div>
+                    <div class="pull-left col-xs-9">
+                        <div class="mgl20 event_title">
+                            <a href="{:U('Event/Index/detail',array('id'=>$vo['id']))}" target="_blank" class="text-more" style="width: 100%">{$vo.title}</a>
+                        </div>
+                        <div class="event_fq_count pull-left">
+                            <div class="pull-left mgb10 col-xs-12">
+                                <div style="margin:10px;">
+                                    <div class=" col-xs-4 pdl0 event_count">堂号：<span class="event_count">{$vo.sTime}</span>
+                                    </div>
+                                    <div class=" col-xs-4 pdl0 event_count">郡望：<span class="event_count">{$vo.eTime}</span>
+                                    </div>
+                                    <div class=" col-xs-4 pdl0 event_count">编修人：<a style="color:green" class="pdl10" href="{$vo.user.space_url}">
+                                        <span>{$vo.user.nickname}</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-left mgb10 col-xs-12">
+                                <div style="margin:10px;">
+                                    <div class=" col-xs-4 pdl0 event_count">发起人：<span class="event_count">{$vo.sponsor}</span>
+                                    </div>
+                                    <div class=" col-xs-4 pdl0 event_count">号召人：<span class="event_count">{$vo.address}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="word-wrap pull-left mgl20 event_short_explain" style="width: 80%">家训家规：
+                                {$vo.explain|op_t|getShortSp=30}
+                            </div>
+                            <div class="pull-left mgl20 mgt10" style=" ">
+                                <div class="btn-group">
+                                    <if condition="($vo['uid'] eq is_login()) OR is_administrator(is_login())">
+                                        <a href="{:U('detail',array('id'=>$vo['id']))}" class="btn btn-default" target="_blank">世系图谱</a>
+                                        <a href="{:U('kin',array('id'=>$vo['id']))}" class="btn btn-default">族人列表</a>
+                                        <!-- <a href="{:U('ebook',array('id'=>$vo['id']))}" class="btn btn-default" target="_blank">电子族谱</a> -->
+
+                                        <a href="{:U('edit',array('id'=>$vo['id']))}" class="btn btn-default">编辑族谱</a>
+                                        <!-- <a class="btn btn-default delEvent" data-eventID="{$vo.id}">删除族谱</a> -->
+                                    </if>
+                                    <!-- <if condition="($vo['uid'] neq is_login())">
+                                        <php>if(!$vo['check_isSign']){</php>
+
+                                        <php>if($vo['deadline'] < time()){</php>
+                                        <a class="btn btn-default  " href="javascript:"
+                                           onclick="toast.error({:L('')})">{:L('_REGISTRATION_HAS_OVER_')} </a>
+                                        <php>}else{</php>
+                                        <if condition="is_login() eq 0">
+                                            <a class="btn btn-info  " href="javascript:" style="color: #fff"
+                                               onclick="toast.error({:L('_ERROR_REGISTER_AFTER_LOGIN_')})">{:L('_REGISTER_OP_')} </a>
+                                            <else/>
+                                            <if condition="check_auth('Event/Index/doSign')">
+                                                <a class="btn btn-primary event_sign " style="color: #fff"
+                                                   href="{:U('ajax_sign',array('event_id'=>$vo['id']))}">{:L('_REGISTER_OP_')} </a></if>
+                                        </if>
+                                        <php>}</php>
+                                        <php>}else{</php>
+                                        &nbsp;&nbsp;&nbsp;&nbsp;<a class="btn btn-default unSign"
+                                                                   data-eventID="{$vo.id}" href="javascript:"
+                                                                   id="unSign">{:L('_REGISTER_CANCEL_')} </a>
+
+                                        <span style="line-height: 34px;"> {:L('_REGISTER_ED_')}&nbsp;&nbsp;&nbsp;&nbsp;<if
+                                                condition="$vo['check_isSign'][0]['status'] eq 1">{:L('_AUDIT_ED_')}
+                                            <else/>
+                                            {:L('_AUDIT_OP_')}
+                                        </if></span>
+
+                                        <php>}</php>
+
+                                    </if> -->
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </volist>
+            <div class="row issue_list">
+
+
+                <if condition="count($contents) eq 0">
+                    <div style="font-size:3em;padding:2em 0;color: #ccc;text-align: center">{:L('_TIP_EMPTY_')}</div>
+                </if>
+
+            </div>
+        </div>
+
+
+        <div>
+            <div class="pull-right">
+
+                {:getPagination($totalPageCount,10)}
+            </div>
+        </div>
+
+    </div>
+
+</div>
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <script type="text/javascript" src="__JS__/event.js"></script>
+    <script>
+        $(function () {
+            $('#top_nav >li >a ').mouseenter(function () {
+                $('.children_nav').hide();
+                $('#children_' + $(this).attr('data')).show();
+            });
+
+            $('.event_sign').magnificPopup({
+                type: 'ajax',
+                overflowY: 'scroll',
+                modal: true,
+                callbacks: {
+                    ajaxContentAdded: function () {
+                        // Ajax content is loaded and appended to DOM
+
+                        console.log(this.content);
+                    }
+                }
+            });
+
+        })
+
+
+    </script>
+
+    <script type="text/javascript">
+        var SUPPORT_URL = "{:addons_url('Support://Support/doSupport')}";
+
+    </script>
+    <script>
+        //检查两次输入的密码是否一致
+        $(function () {
+            $('.searchOther').click(function () {
+                var title = $("#title").val();
+                var tang = $("#sTime").val();
+                var jun = $("#eTime").val();
+                window.location.href="/index.php?s=/ucenter/config/other/title/"+title+"/tang/"+tang+"/jun/"+jun; 
+            })
+
+
+        })
+
+    </script>
+</block>

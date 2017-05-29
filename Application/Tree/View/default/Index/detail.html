@@ -1,0 +1,341 @@
+<!DOCTYPE html >
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{$title} - {$CONFIG['title']}</title>
+<link rel="stylesheet" type="text/css" href="__JS__/../tree/js/plugin/bootstrap/css/bootstrap.min.css">
+<link rel="stylesheet" type="text/css" href="__JS__/../tree/styles/utils.css">
+<link href="__JS__/../tree/styles/base.css" rel="stylesheet" type="text/css" />
+<link href="__JS__/../tree/styles/master-z.css" rel="stylesheet" type="text/css" />
+<style type="text/css">
+    .control-panel .layer .goosip-btn path{fill:#2fbe52;stroke:#ffffff;stroke-width:2px;stroke-miterlimit:10;fill-opacity:0;cursor:pointer}
+    .control-panel .layer .goosip-btn text{fill:#FFFFFF;cursor:pointer}
+    .control-panel .layer .goosip-btn:hover path{fill:#ffffff;fill-opacity:1}
+    .control-panel .layer .goosip-btn:hover text{fill:#2fbe52}
+    .control-panel .layer .goosip-btn.disabled path{fill:#2fbe52;fill-opacity:0;stroke:#aaaaaa;stroke-width:2px;cursor:default}
+    .control-panel .layer .goosip-btn.disabled text{fill:#aaaaaa;cursor:default}
+    .control-panel .layer .close-btn-container{position:absolute;right:0;top:0;font-size:10px}
+    .control-panel .layer .close-btn-container .btn-link{font-size:3em;color:#ffffff}
+    .disabled { pointer-events: none; }
+</style>
+<script type="text/javascript" src="__JS__/../tree/js/jquery.js" ></script>
+<script type="text/javascript" src="__JS__/../tree/js/utils.js"></script>
+<script type="text/javascript">
+//初始化全局变量
+window.CP = "";
+window.showMod = "edit";
+</script>
+<script type="text/javascript" src="__JS__/../tree/js/datepicker/WdatePicker.js" ></script>
+<script type="text/javascript" src="__JS__/../tree/js/jquery.cityselect.js"></script>
+<script type="text/javascript" src="__JS__/../tree/js/layer/layer.js"></script>
+<script type="text/javascript" src="__JS__/../tree/js/Agent.js"></script>
+<script type="text/javascript" src="__JS__/../tree/js/canvesDraw.js"></script>
+</head>
+
+<body>
+
+<!--弹出层-->
+<div id="coverShadow"></div>
+
+<!--关系层-->
+<div id="addBox">
+  <span id="closeA"></span>
+  <div class="control-panel">
+    <svg x="0px" y="0px" width="400px" height="400px" viewBox="0 0 600 600" class='layer'>
+        <g id="gossip-bg">
+            <path fill="#2fbe52" d="M583.343,296l-80.161-193.526v0L401.78,203.877l-0.004,0.003c22.839,24.175,37.163,56.479,38.163,92.12 H583.343z"></path>
+            <path fill="#2fbe52" d="M198.224,396.121c-22.839-24.176-37.163-56.48-38.163-92.121H16.657l80.16,193.525l101.402-101.4 L198.224,396.121z" ></path>
+            <path fill="#2fbe52" d="M303.999,16.657L303.999,16.657v0.001L304,160.062v0c35.641,1,67.944,15.322,92.119,38.163l0.005-0.005 L497.525,96.818L303.999,16.657z"></path>
+            <path fill="#2fbe52" d="M296,439.939c-35.641-1.002-67.944-15.322-92.118-38.164l-0.005,0.006L102.475,503.184L296,583.344V439.941 V439.939z"></path>
+            <path fill="#2fbe52" d="M102.475,96.819L203.877,198.22l0,0l0.003,0.004l0.001,0c24.175-22.839,56.479-37.164,92.119-38.164v0 V16.658v0L102.475,96.819L102.475,96.819L102.475,96.819z"></path>
+            <path fill="#2fbe52" d="M198.22,203.876L96.818,102.475l0,0L16.657,296h143.403c1-35.642,15.325-67.945,38.164-92.119 L198.22,203.876L198.22,203.876z"></path>
+            <path fill="#2fbe52" d="M396.124,401.781l-0.001-0.002l-0.003-0.002l-0.002-0.002c-24.175,22.84-56.478,37.164-92.118,38.164 v143.404l193.524-80.16l0,0L396.124,401.781z"></path>
+            <path fill="#2fbe52" d="M401.78,396.123l101.401,101.402h0.001L583.343,304H439.939c-1,35.641-15.325,67.945-38.164,92.119l0,0 L401.78,396.123z"></path>
+        </g>
+        <g id="male-bg">
+            <path fill="#2fbe52" d="M355.486,244.513c0-30.645-24.842-55.487-55.486-55.487l0,0c0,0,0,0,0,0l0,0h0   c-61.288,0-110.973,49.686-110.973,110.974c0,61.289,49.685,110.973,110.973,110.974c-30.644,0-55.486-24.843-55.486-55.487   S269.355,300,300,300h0l0,0C330.645,300,355.486,275.158,355.486,244.513z"></path>
+        </g>
+        <g id="spouse-bg">
+            <linearGradient id="SVGID_1_" gradientUnits="userSpaceOnUse" x1="244.5142" y1="300" x2="410.9736" y2="300">
+                <stop offset="0" style="stop-color:#CC0000;"></stop>
+                <stop offset="1" style="stop-color:#590000;"></stop>
+            </linearGradient>
+            <path fill="#3499da" d="M244.514,355.487c0,30.645,24.842,55.486,55.486,55.486l0,0c0,0,0,0,0,0l0,0l0,0 c61.289,0,110.973-49.686,110.973-110.974c0-61.289-49.684-110.973-110.973-110.974c30.645,0,55.486,24.843,55.486,55.487 S330.646,300,300.001,300h0l0,0C269.356,300,244.514,324.843,244.514,355.487z"></path>
+        </g>
+        <g id="bnts">
+            <g id="father" class="goosip-btn"  rela="1" sex="male">
+                <path d="M266.45,90.341 c4.227,10.205-0.619,21.904-10.824,26.131l-55.433,22.961c-10.205,4.227-21.904-0.619-26.131-10.824l0,0 c-4.227-10.205,0.619-21.904,10.824-26.131l55.433-22.961C250.524,75.29,262.223,80.136,266.45,90.341L266.45,90.341z"></path>
+                <text transform="matrix(0.9239 -0.3827 0.3827 0.9239 205.7002 121.3696)">父亲</text>
+            </g>
+            <g id="mother" class="goosip-btn" rela="2" sex="female">
+                <path d="M426.194,128.575 c-4.228,10.205-15.927,15.051-26.132,10.824l-55.433-22.961c-10.204-4.227-15.051-15.926-10.824-26.131l0,0 c4.228-10.205,15.927-15.051,26.132-10.824l55.433,22.961C425.575,106.671,430.421,118.37,426.194,128.575L426.194,128.575z"></path>
+                <text transform="matrix(0.9239 0.3827 -0.3827 0.9239 361.2969 107.5591)">母亲</text>
+            </g>
+            <g id="sister" class="goosip-btn" rela="4" sex="female">
+                <path d="M510.135,267.707 c-10.206,4.227-21.905-0.62-26.132-10.825l-22.961-55.433c-4.227-10.204,0.619-21.904,10.823-26.131l0,0 c10.206-4.227,21.905,0.62,26.132,10.825l22.961,55.432C525.186,251.78,520.339,263.479,510.135,267.707L510.135,267.707z"></path>
+                <text transform="matrix(0.3827 0.9239 -0.9239 0.3827 479.1055 206.9561)">姐姐</text>
+            </g>
+            <g id="little-sister" class="goosip-btn" rela="4" sex="female">
+                <path d="M471.425,425.194 c-10.206-4.228-15.051-15.928-10.823-26.133l22.96-55.432c4.227-10.204,15.927-15.051,26.131-10.824l0,0 c10.206,4.228,15.051,15.928,10.823,26.132l-22.96,55.433C493.329,424.575,481.629,429.421,471.425,425.194L471.425,425.194z"></path>
+                <text transform="matrix(-0.3827 0.9239 -0.9239 -0.3827 492.4404 360.2969)">妹妹</text>
+            </g>
+            <g id="daughter" class="goosip-btn" rela="8" sex="female">
+                <path d="M333.271,509.693 c-4.227-10.206,0.62-21.905,10.826-26.132l55.431-22.961c10.204-4.227,21.904,0.619,26.132,10.823l0,0 c4.228,10.206-0.62,21.905-10.825,26.131l-55.432,22.962C349.198,524.744,337.499,519.897,333.271,509.693L333.271,509.693z"></path>
+                <text transform="matrix(-0.9239 0.3827 -0.3827 -0.9239 394.0234 478.6641)">女儿</text>
+            </g>
+            <g id="son" class="goosip-btn" class="son" rela="7" sex="male">
+                <path d="M174.062,471.426 c4.228-10.206,15.928-15.051,26.133-10.823l55.431,22.96c10.204,4.227,15.051,15.927,10.825,26.131l0,0 c-4.228,10.206-15.928,15.051-26.132,10.823l-55.433-22.96C174.681,493.33,169.836,481.63,174.062,471.426L174.062,471.426z"></path>
+                <text transform="matrix(-0.9239 -0.3827 0.3827 -0.9239 238.9609 492.4434)">儿子</text>
+            </g>
+            <g id="little-brother" class="goosip-btn" rela="3" sex="male">
+                <path d="M89.305,331.732 c10.207-4.227,21.905,0.62,26.132,10.826l22.96,55.431c4.227,10.204-0.619,21.904-10.823,26.132l0,0 c-10.206,4.228-21.905-0.62-26.131-10.825l-22.961-55.432C74.254,347.659,79.102,335.96,89.305,331.732L89.305,331.732z"></path>
+                <text transform="matrix(-0.3827 -0.9239 0.9239 -0.3827 120.335 392.4854)">弟弟</text>
+            </g>
+            <g id="brother" class="goosip-btn" rela="3" sex="male">
+                <path d="M128.419,174.21 c10.206,4.229,15.051,15.928,10.823,26.134l-22.959,55.431c-4.227,10.204-15.927,15.051-26.131,10.825l0,0 c-10.206-4.227-15.051-15.928-10.823-26.132l22.96-55.433C106.515,174.83,118.215,169.984,128.419,174.21L128.419,174.21z"></path>
+                <text transform="matrix(0.3827 -0.9239 0.9239 0.3827 107.4019 239.1108)">兄长</text>
+            </g>
+            <g id="myself" class="goosip-btn" rela="5" sex="male">
+                <path d="M350.001,245.234 c-0.002,11.047-8.956,20-20.003,20H270c-11.045,0-20-8.954-20.001-19.999l0,0c0-11.047,8.956-20,20-20l60-0.001 C341.046,225.234,350,234.189,350.001,245.234L350.001,245.234z"></path>
+                <text transform="matrix(1 0 0 1 273 250.6538)">丈夫</text>
+            </g>
+            <g id="spouse" class="goosip-btn" rela="6" sex="female">
+                <path d="M350.001,354.926 c-0.002,11.048-8.956,20.001-20.003,20H270c-11.045,0.002-20-8.953-20.001-19.998l0,0c0-11.047,8.956-20,20-20h60 C341.046,334.926,350,343.882,350.001,354.926L350.001,354.926z"></path>
+                <text transform="matrix(1 0 0 1 282 360.3467)">妻子</text>
+            </g>
+            <g id="first" class="goosip-btn" rela="9" sex="male">
+                <path d="M350.001,300.234 c-0.002,11.047-8.956,20-20.003,20H270c-11.045,0-20-8.954-20.001-19.999l0,0c0-11.047,8.956-20,20-20l60-0.001 C341.046,280.289,350,289.244,350.001,300.289L350.001,300.289z"></path>
+                <text transform="matrix(1 0 0 1 273 305.6538)">第一人</text>
+            </g>
+            
+        </g>
+    </svg>
+</div>
+    <!-- <a href="javascript:void(0);" class="fater" rela="1" sex="male">父亲</a>
+  <a href="javascript:void(0);" class="mother" rela="2" sex="female">母亲</a>
+  <a href="javascript:void(0);" class="brother" rela="3" sex="male">兄弟</a>
+  <a href="javascript:void(0);" class="sister" rela="4" sex="female">姐妹</a>
+  <a href="javascript:void(0);" class="spouse" rela="5" sex="male">配偶</a>
+  <a href="javascript:void(0);" class="spouse" rela="6" sex="female">配偶</a>
+  <a href="javascript:void(0);" class="son" rela="7" sex="male">儿子</a>
+  <a href="javascript:void(0);" class="daughter" rela="8" sex="female">女儿</a>
+  <a href="javascript:void(0);" class="firstPerson" rela="9" sex="male">第一人</a> -->
+</div>
+<!--信息层-->
+<form id="personInfo">
+    <input type="hidden" name="type" id="type"/>
+    <input type="hidden" name="userId" id="userid"/>
+    <input type="hidden" name="family.id" id="familyid"/>
+    <input type="hidden" name="father.id" id="fatherid"/>
+    <input type="hidden" name="mother.id" id="motherid"/>
+    <input type="hidden" name="partner.id" id="partnerid"/>
+    <input type="hidden" name="level" id="level" value="0">
+
+    <div id="infoBox" class="fm_msg container">
+      <div id="infoContent">
+        <div class="row" style="height: 150px;">
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>姓<span>*</span></label>
+                    <input type="text" class="form-control" id="firstname" name="firstname" placeholder="例如：李" onblur="value=value.replace(/[^\u3400-\uFA29]/g,'')" maxlength="10">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="form-group">
+                    <label>名<span>*</span></label>
+                    <input type="text" class="form-control" id="lastname" name="lastname" placeholder="例如：白" onblur="value=value.replace(/[^\u3400-\uFA29]/g,'')" maxlength="15">
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div id="headEdit"> <img id="header" src="__JS__/../tree/imgs/man.jpg"> <span id="headTitle" style="display: none;">添加完再编辑头像</span> </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group fm_order">
+                    <label>兄妹排行<span>*</span></label>
+                    <input type="text" class="form-control" id="orders" placeholder="例如：1" name="orders" onblur="value=value.replace(/[^\d]/g, '')" maxlength="3">
+                    <input type="text" class="form-control" id="partnerOrder" placeholder="例如：1" name="partnerOrder" style="display:none;" onblur="value=value.replace(/[^\d]/g, '')" maxLength='3'/>
+                </div>
+                <script type="text/javascript">
+                    $('.fm_order select').change(function() {
+                        if($(this).val() == 0){
+                            $('.fm_order select').hide().siblings('input').show()
+                        }
+                    })
+                </script>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>字辈</label>
+                    <input type="text" class="form-control" id="gname" placeholder="例如：增" name="gname" onblur="value=value.replace(/[^\u3400-\uFA29]/g,'')" maxlength="2">
+                </div>
+            </div>
+        </div>
+        <div class="row"  id="chooseParent" style="display: none">
+            <div class="col-md-12">
+                <div class="form-group fm_order">
+                    <label id="choosePTit">修改母亲</label><br />
+                    <select class="form-control" id="parentList"></select>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>性别<span>*</span></label><br />
+                    <div class="radio-inline">
+                        <label><input type="radio"  name="gender" value="1" id="man" disabled="disabled" checked>男</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="gender" id="women" disabled="disabled" value="0">女</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>在世<span>*</span></label><br />
+                    <div class="radio-inline">
+                        <label><input type="radio" name="isLiving" value="1" id="live" checked>是</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="isLiving" value="0" id="dead">否</label>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>年份类型<span>*</span></label><br />
+                    <div class="radio-inline">
+                        <label><input type="radio" name="birthdayType" value="1" checked>农历</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="birthdayType" value="0">公历</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>生日<span>*</span></label>
+                    <input type="text" class="form-control" id="birthday" onclick="WdatePicker();" name="birthday" placeholder="请输入时间">
+                </div>
+            </div>
+        </div>
+        <div class="row" id="deathBox">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>年份类型<span>*</span></label><br />
+                    <div class="radio-inline">
+                        <label><input type="radio" name="deathType" value="1" checked>农历</label>
+                    </div>
+                    <div class="radio-inline">
+                        <label><input type="radio" name="deathType" value="0">公历</label>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>逝世<span>*</span></label>
+                    <input type="text" class="form-control" id="deathDate" onclick="WdatePicker();" name="deathDate" placeholder="请输入时间">
+                </div>
+            </div>
+        </div>
+        <!-- <div class="wor" id="idAreaBox">
+            <div class="col-md-12">
+                <div class="form-group source">
+                    <label>籍贯<span>*</span></label>
+                    <div class="" id="idArea">
+                        <select class="form-control prov" name="native_place[]"></select>
+                        <select class="form-control city" name="native_place[]"></select>
+                        <select class="form-control dist" id="idAreaDist" name="native_place[]"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="wor" id="locationBox">
+            <div class="col-md-12">
+                <div class="form-group source">
+                    <label>所在地<span>*</span></label>
+                    <div class="" id="locationArea">
+                        <select class="form-control prov" name="location[]"></select>
+                        <select class="form-control city" name="location[]"></select>
+                        <select class="form-control dist" id="locationAreaDist" name="location[]"></select>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>手机</label>
+                    <input type="text" class="form-control" id="phonenumber" name="phonenumber" maxlength="11" placeholder="请输入手机">
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>邮箱</label>
+                    <input type="text" class="form-control" id="email" name="email" placeholder="请输入邮箱">
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="form-group">
+                    <label>QQ</label>
+                    <input type="text" class="form-control" id="QQ" name="QQ" placeholder="请输入QQ">
+                </div>
+            </div> -->
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="form-group">
+                    <label>个人简介</label>
+                    <textarea class="form-control" id="descPrintting" name="descPrintting" placeholder="请认真填写个人简介，300字以内为最佳..."></textarea>
+                    <p class="c9">300字以内为最佳效果，您当前已输入<span id="counter">0</span>个字符</p>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12" id="sent">
+                <button  type="button" class="btn btn-success" id="save">保存</button>
+                <button type="button" class="btn btn-link" id="cancel">取消</button>
+            </div>
+        </div>
+    </div>
+    </div>
+</form>
+
+<!--搜索区-->
+<div class="fm_search">
+    <div class="input-group">
+        <input type="text" class="form-control" id="search_input" placeholder="搜索族人">
+        <span class="input-group-btn">
+            <button class="btn btn-success" type="button" id="search_btn">搜索</button>
+        </span>
+    </div>
+</div>
+<div class="fm_search_result" id="search-result" style="display: none">
+    <ul id="search_result_list">
+    </ul>
+</div>
+
+
+<!--树结构-->
+<div id="visibleBox" class="page clearfix">
+      <div class="home-free" id="drawBox">
+        <!--canvas容器-->
+        <canvas width="1000" height="1000" id="lineCanvas"></canvas>
+      </div>
+    <img id="firstPerson" class="person-add" src="__JS__/../tree/imgs/first_add.png" />
+</div>
+
+<script type="text/javascript">
+    getData({$family_id},{$user_id},null,null,true);
+</script>
+</script>
+</body>
+</html>

@@ -1,0 +1,48 @@
+<div class="with-padding clearfix">
+    <ul class="pull-left nav nav-secondary">
+        <li class="active"><a href="{:U('','name=Alidayu')}">短信签名</a></li>
+        <li><a href="{:U('','name=Alidayu&dir=tpl')}">内容模板</a></li>
+        <li><a href="{:U('','name=Alidayu&dir=url2config')}">路由配置</a></li>
+    </ul>
+    <div class="pull-right"></div>
+</div>
+
+<div class="with-padding">
+    <a class="btn" href="{:addons_url('Alidayu://Alidayu/addSignname')}">新 增</a>
+</div>
+<div class="with-padding">
+    <table class="table table-bordered">
+        <thead>
+        <tr>
+            <th>序号</th>
+            <volist name="listKey" id="vo">
+                <th>{$vo}</th>
+            </volist>
+            <th>操作</th>
+        </tr>
+        </thead>
+        <tbody>
+        <volist name="_list" id="lv" key="vo">
+            <tr>
+                <td>{$lv.id}</td>
+                <volist name="listKey" id="lk">
+                   <td>
+					<switch name="key">
+						<case value="type">
+							{$lv[$key]=='1'?'固定签名':'自定义签名'}
+						</case>
+						<default/>{$lv.$key}
+					</switch>
+					</td>
+                </volist>
+                <td>
+                    <eq name="lv['type']" value="0">
+                        <a href="{:addons_url('Alidayu://Alidayu/editSignname',array('id'=>$lv['id']))}">编辑</a>
+                        <a class="confirm ajax-get" href="{:addons_url('Alidayu://Alidayu/delSignname',array('id'=>$lv['id']))}">删除</a>
+                    </eq>
+                </td>
+            </tr>
+        </volist>
+        </tbody>
+    </table>
+</div>

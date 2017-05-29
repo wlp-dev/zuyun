@@ -1,0 +1,62 @@
+<extend name="Base/common"/>
+
+<block name="style">
+    <link href="__CSS__/event.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="body">
+<!--导航-->
+    <div class="col-xs-12" >
+        <div class="forum_module" style="min-height: 600px;margin-top:60px;">
+            <div class="row evt-title">
+                <div class="pull-left">{:L('_EVENT_HOME_PAGE_')}</div>
+            </div>
+
+            <volist name="contents" id="vo">
+                <div class="clearfix event_list">
+                    <include file="_eventlist"/>
+                </div>
+            </volist>
+            <div class="row issue_list">
+                <if condition="count($contents) eq 0">
+                    <div class="no-event">{:L('_TIP_EMPTY_')}</div>
+                    <div class="col-xs-12" style="text-align:center">
+                        <a style="width:240px;margin:0px auto" class="btn btn-success btn-large event_btn " href="{:U('Index/add')}">创建家庭谱</a>
+                    </div>
+                </if>
+            </div>
+        </div>
+
+        <div>
+            <div class="pull-right">
+
+                {:getPagination($totalPageCount,10)}
+            </div>
+        </div>
+    </div>
+</block>
+
+<block name="script">
+    <script type="text/javascript" src="__STATIC__/uploadify/jquery.uploadify.min.js"></script>
+    <script type="text/javascript" src="__JS__/event.js"></script>
+    <script>
+        $(function () {
+            $('#top_nav >li >a ').mouseenter(function () {
+                $('.children_nav').hide();
+                $('#children_' + $(this).attr('data')).show();
+            });
+        })
+    </script>
+    <script type="text/javascript">
+        var SUPPORT_URL = "{:addons_url('Support://Support/doSupport')}";
+    </script>
+</block>
+
+
+
+
+
+
+
+
+
+

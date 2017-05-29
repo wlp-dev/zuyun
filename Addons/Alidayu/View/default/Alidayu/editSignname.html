@@ -1,0 +1,34 @@
+<extend name="Public/base"/>
+<block name="body">
+
+	<div class="main-title clearfix ">
+		<h2><empty name="info['id']">新增<else/>编辑</empty>短信签名</h2>
+	</div>
+	<!-- 表单 -->
+	<form id="form" action="{:addons_url('Alidayu://Alidayu/updateSignname')}" method="post" class="form-horizontal">
+		<!-- 基础文档模型 -->
+		<div id="tab1" class="tab-pane with-padding in tab1">
+
+			<div class="form-item cf">
+				<label class="item-label">签名</label>
+				<div class="controls">
+					<input type="text" class="text form-control form-input-width" name="name" value="{$info.name}">
+				</div>
+			</div>
+
+			<div class="form-item cf">
+				<label class="item-label">类型<span class="check-tips">（选择为固定签名后将不可修改）</span></label>
+				<div class="controls ">
+					  <label class="radio-inline"><input type="radio" class="radio-inline" name="type" value="0" <neq name="info['type']" value="1">checked="checked"</neq>>自定义签名</label>
+					  <label class="radio-inline"><input type="radio" class="radio-inline" name="type" value="1" <eq name="info['type']" value="1">checked="checked"</eq>>固定签名</label>
+				</div>
+			</div>
+
+		</div>
+		<input type="hidden" name="id" value="{$info.id}"/>
+		<div class="form-item with-padding">
+			<input class="btn submit-btn " type="submit" value="确 定" />
+			<input class="btn btn-return" type="reset" value="重置" />
+		</div>
+	</form>
+</block>

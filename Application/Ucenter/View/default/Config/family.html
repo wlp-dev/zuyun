@@ -1,0 +1,98 @@
+<extend name="Base/common"/>
+<block name="style">
+    <link href="__CSS__/event.css" rel="stylesheet" type="text/css"/>
+	 <link href="__CSS__/family.css" rel="stylesheet" type="text/css"/>
+</block>
+<block name="body">
+<div style="margin-top:60px;"></div>
+    <div id="center">
+        <div class="forum_module" style="width: 100%;min-height: 600px;">
+
+            <div class="row" style="padding: 10px 10px 0 0 ">
+                <div class="col-xs-12">
+                    <div class="event_header_title">
+                        <div class="pull-left">我加入的族谱</div>
+                    </div>
+                </div>
+            </div>
+
+            <volist name="contents" id="vo">
+                <div class="clearfix event_list">
+                    <div class="col-xs-3" style="padding: 0">
+
+                        <a class="pull-left" href="{:U('kin',array('id'=>$vo['id']))}"> <img
+                                class=""
+                                src="{$vo.cover_id|getThumbImageById=320,210}" style="width: 180px;height: 210px;"/></a>
+                    </div>
+                    <div class="pull-left col-xs-9">
+                        <div class="mgl20 event_title">
+                            <a href="{:U('kin',array('id'=>$vo['id']))}" class="text-more" style="width: 100%">{$vo.title}</a>
+                        </div>
+                        <div class="event_fq_count pull-left">
+                            <div class="pull-left mgb10 col-xs-12">
+                                <div style="margin:10px;">
+                                    <div class=" col-xs-4 pdl0 event_count">堂号：<span class="event_count">{$vo.sTime}</span>
+                                    </div>
+                                    <div class=" col-xs-4 pdl0 event_count">郡望：<span class="event_count">{$vo.eTime}</span>
+                                    </div>
+                                    <div class=" col-xs-4 pdl0 event_count">编修人：<a style="color:green" class="pdl10" href="{$vo.user.space_url}">
+                                        <span>{$vo.user.nickname}</span></a>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="pull-left mgb10 col-xs-12">
+                                <div style="margin:10px;">
+                                    <div class=" col-xs-4 pdl0 event_count">发起人：<span class="event_count">{$vo.sponsor}</span>
+                                    </div>
+                                    <div class=" col-xs-4 pdl0 event_count">号召人：<span class="event_count">{$vo.address}</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="word-wrap pull-left mgl20 event_short_explain" style="width: 80%">家训家规：
+                                {$vo.explain|op_t|getShortSp=30}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </volist>
+            <div class="row" style="margin-top:80px;width:600px;margin-left:100px">
+
+
+                <if condition="count($contents) eq 0">
+                   
+                       
+
+                        <div class="col-xs-8">
+                            <input type="text" class="form-control" id="invCode" name="invCode" value="" placeholder="请输入匹配码">
+                        </div>
+                        <div class="col-xs-4">
+                            <button type="button" class="btn btn-primary connect">关联族谱</button>
+                        </div>
+                   
+                </if>
+
+            </div>
+        </div>
+    </div>
+
+</block>
+
+<block name="script">
+    <script>
+        //检查两次输入的密码是否一致
+        $(function () {
+            $('.connect').click(function () {
+                var invCode = $("#invCode").val();
+                var postData = {
+                    invCode : invCode
+                }
+                $.post(U('Ucenter/Config/cleanRemember'), postData, function (res) {
+                    handleAjax(res);
+                })
+            })
+
+
+        })
+    </script>
+</block>

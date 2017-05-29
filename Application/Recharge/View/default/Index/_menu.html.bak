@@ -1,0 +1,16 @@
+<ul class="nav nav-pills ucenter-tab">
+
+    <if condition=" modC('OPEN_RECHARGE',0,'recharge') eq 1">
+     <li id="menu_recharge"><a href="{:U('index/index')}">{:L("_ONLINE_RECHARGE_")}</a></li>
+    </if>
+    <li id="menu_rechargeList"><a href="{:U('index/rechargeList')}">{:L("_RECHARGE_ORDER_")}</a></li>
+
+
+   <if condition=" modC('OPEN_WITHDRAW',0,'recharge') eq 1">
+    <li id="menu_withdraw"><a href="{:U('index/withdraw')}">{:L("_WITHDRAWALS_")}</a></li>
+    </if>
+    <li id="menu_withdrawList"><a href="{:U('index/withdrawList')}">{:L("_PRESENT_RECORD_")}</a></li>
+</ul>
+<script>
+    $('#menu_'+"{$tab}").addClass('active')
+</script>

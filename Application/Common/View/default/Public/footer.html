@@ -1,0 +1,84 @@
+<style type="text/css">
+    .about-us p a{
+        color: #fff;
+        font-size: 13px;
+    }
+    .about-us p a:hover,.friend a:hover{
+        text-decoration: underline;
+    }
+</style>
+<div class="next-box">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-4 about-us">
+                <p style="margin-top: 5px">
+                    <img src="/Public/images/logo_white.png" alt="">
+                </p>
+                <p>
+                    <a  href="/index.php?s=/paper/index/index/id/1.html">族云简介</a>
+                    |                                      
+                    <a href="/index.php?s=/paper/index/index/id/2.html">招贤纳士</a>
+                    |
+                    <a href="/index.php?s=/paper/index/index/id/3.html">隐私条例</a>
+                    |
+                    <a href="/index.php?s=/paper/index/index/id/4.html">加盟招商</a>
+                    |
+                    <a href="/index.php?s=/paper/index/index/id/5.html">联系我们</a>
+                </p>
+                <!-- <p class="p-head">关于我们</p>
+                {:modC('ABOUT_US',L('_NOT_SET_NOW_'),'Config')} -->
+            </div>
+            <div class="col-xs-3 friend">
+                <p class="p-head">友情链接</p>
+                {:W('Common/SuperLinks/superLinks')}
+            </div>
+            <div class="col-xs-3 comp">
+                <p class="p-head">联系我们</p>
+                {:modC('COMPANY', L('_NOT_SET_NOW_'), 'Config')}
+            </div>
+            <div class="col-xs-2 text-center">
+                <p style="margin-top: 5px">
+                    <php>
+                        $logo = get_cover(modC('QRCODE_BOTTOM',0,'Config'),'path');
+                        $logo = $logo?$logo:'__PUBLIC__/images/code.png';
+                    </php>
+                    <img src="{$logo}" alt="">
+                </p>
+            </div>
+        </div>
+        <div class="row last-box text-center">
+            <p>
+                
+                <span>{:modC('COPY_RIGHT',L('_NOT_SET_NOW_'),'Config')}</span>
+            </p>
+            {$count_code}
+        </div>
+    </div>
+</div>
+
+<include file="Public/js"/>
+
+<block name="script"><!-- 用于加载js代码 --></block>
+<script>
+    $(document).ready(function () {
+        $('[data-role="add_more"]').click(function () {
+            $(".footer-bar").fadeToggle();
+            $("#add_more").hide();
+        });
+        $('[data-role="close_more"]').click(function () {
+            $(".footer-bar").fadeToggle();
+            $("#add_more").show("slow");
+        });
+    });
+</script>
+<!-- 页面footer钩子，一般用于加载插件JS文件和JS代码 -->
+{:hook('pageFooter', 'widget')}
+<!-- 调用全站公告部件-->
+{:W('Common/Announce/render')}
+
+<!-- 调用消息部件-->
+{:W('Common/Message/render')}
+<div class="hidden"><!-- 用于加载统计代码等隐藏元素 -->
+    {$count_code}
+    <block name="hidden"></block>
+</div>
